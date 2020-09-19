@@ -1,14 +1,116 @@
 <html>
-    <head>
-        <!-- Bootstrap -->
+
+<head>
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </head>
-    
-    <body>
-        <h1>ahdbidhi</h1>
-        <h2 style="color: yellow">Kashop is utka shop</h2>
-    </body>
+
+    <script>
+        const example = "<div class=\"media border p-3\"><img src=\"#AVATAR#\" alt=\"ava\" class=\"mr-3 mt-3 rounded-circle\" style=\"width:60px;\"><div class=\"media-body\"><h4>Posted on #NAME#<small><i>#DATA#</i></small></h4><p>#TEXT#</p><button class = \"btn btn-outline-danger\" onclick=\"RemoveComment(this)\">Remove Comment</button></div></div>"
+
+        function CreateComment() {
+            let name = NameInput.value;
+            let container = ContainerInput.value;
+            var newComment = example;
+            newComment = newComment.replace("#NAME#", name + " ");
+            newComment = newComment.replace("#TEXT#", container);
+            newComment = newComment.replace("#DATA#", new Date().toDateString());
+            let path = $(".active").children("").attr("src");
+            newComment = newComment.replace("#AVATAR#", path);
+            document.getElementById("CommentBox").innerHTML += newComment;
+        }
+
+        function Validate() {
+            var button = $("#PostButton");
+            var IsInValid = NameInput.value == "" || ContainerInput.value == "";
+
+            button.removeClass(IsInValid ? "btn-outline-warning" : "btn-outline-warning");
+            button.addClass(IsInValid ? "btn-outline-warning" : "btn-outline-success");
+
+            PostButton.onclick = IsInValid ? null : CreateComment;
+        }
+
+        $(document).ready(function() {
+            NameInput.onchange = Validate;
+            ContainerInput.onchange = Validate;
+            Validate();
+        })
+
+        function RemoveComment(x) {
+            x.parentElement.parentElement.remove();
+        }
+
+    </script>
+
+
+</head>
+
+<body>
+
+    <div class="container-fluid bg-grey">
+        <h2 class="text-center">CONTACT</h2>
+        <div class="row">
+            <div class="col-sm-2">
+                <div id="demo" class="carousel slide" data-ride="carousel" style="margin-bottom: 1vh">
+                    <a class="carousel-control-prev" style="background-color: black;" href="#demo" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <div class="carousel-inner" style="text-align-last: center">
+                        <div class="carousel-item active">
+                            <img src="Avatars/ava-blue.png" alt="avatar">
+                        </div>
+                        <div class="carousel-item ">
+                            <img src="Avatars/ava-cyan.png" alt="avatar">
+                        </div>
+                        <div class="carousel-item ">
+                            <img src="Avatars/ava-darkblue.png" alt="avatar">
+                        </div>
+                        <div class="carousel-item ">
+                            <img src="Avatars/ava-green.png" alt="avatar">
+                        </div>
+                        <div class="carousel-item ">
+                            <img src="Avatars/ava-lime.png" alt="avatar">
+                        </div>
+                        <div class="carousel-item ">
+                            <img src="Avatars/ava-orange.png" alt="avatar">
+                        </div>
+                        <div class="carousel-item ">
+                            <img src="Avatars/ava-pink.png" alt="avatar">
+                        </div>
+                        <div class="carousel-item ">
+                            <img src="Avatars/ava-red.png" alt="avatar">
+                        </div>
+                        <div class="carousel-item " >
+                            <img src="Avatars/ava-violet.png" alt="avatar">
+                        </div>
+                    </div>
+                    <a class="carousel-control-next" style="background-color: black;" href="#demo" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="NameInput" name="name" placeholder="Name" type="text" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="EmailInput" name="email" placeholder="Email" type="email" required>
+                    </div>
+                </div>
+                <textarea class="form-control" id="ContainerInput" name="comments" placeholder="Comment" rows="5"></textarea><br>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <button class="btn btn-outline-success pull-right" id="PostButton" type="submit" onclick="CreateComment();">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="CommentBox"></div>
+</body>
+
 </html>
