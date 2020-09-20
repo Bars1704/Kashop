@@ -18,14 +18,14 @@
             newComment = newComment.replace("#NAME#", name + " ");
             newComment = newComment.replace("#TEXT#", container);
             newComment = newComment.replace("#DATA#", new Date().toDateString());
-            let path = $(".active").children("").attr("src");
+            let path = $('.active').last().children("").attr("src");
             newComment = newComment.replace("#AVATAR#", path);
             document.getElementById("CommentBox").innerHTML += newComment;
         }
 
         function Validate() {
             var button = $("#PostButton");
-            var IsInValid = NameInput.value == "" || ContainerInput.value == "";
+            var IsInValid = NameInput.value == "" || ContainerInput.value == "" || EmailInput == "";
 
             button.removeClass(IsInValid ? "btn-outline-warning" : "btn-outline-warning");
             button.addClass(IsInValid ? "btn-outline-warning" : "btn-outline-success");
@@ -44,14 +44,15 @@
         }
 
     </script>
-
-
 </head>
 
 <body style="background-color: lightcoral;">
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-right: 5%; margin-left: 5%; ">
         <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">KaSHOp</a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#">Утошки</a>
             </li>
@@ -67,47 +68,23 @@
         </ul>
     </nav>
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
-        
+
         <div class="card" style="margin: 5%;">
             <div class="card-body">
-                <img class="card-img-top" src="duck.jpg" alt="Card image" style="width:100%">
+                <img class="card-img-top" src="Ducks/Boss.png" alt="Card image" style="width:100%">
                 <div class="card-body">
-                    <h4 class="card-title">Уточка 1</h4>
-                    <p class="card-text">Просто уточка, ничего особенного.</p>
+                    <h4 class="card-title">Утка-босс</h4>
+                    <p class="card-text">Ты просишь принять со мной ванную, но ты делаешь это без уважения</p>
                     <a href="#" class="btn btn-primary">Купить</a>
                 </div>
             </div>
         </div>
-    
-    
         <div class="card" style="margin: 5%;">
             <div class="card-body">
-                <img class="card-img-top" src="duck.jpg" alt="Card image" style="width:100%">
+                <img class="card-img-top" src="Ducks/BodyBuilder.jpg" alt="Card image" style="width:100%">
                 <div class="card-body">
-                    <h4 class="card-title">Уточка 1</h4>
-                    <p class="card-text">Просто уточка, ничего особенного.</p>
-                    <a href="#" class="btn btn-primary">Купить</a>
-                </div>
-            </div>
-        </div>
-    
-        <div class="card" style="margin: 5%;">
-            <div class="card-body">
-                <img class="card-img-top" src="duck.jpg" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title">Уточка 1</h4>
-                    <p class="card-text">Просто уточка, ничего особенного.</p>
-                    <a href="#" class="btn btn-primary">Купить</a>
-                </div>
-            </div>
-        </div>
-    
-        <div class="card" style="margin: 5%;">
-            <div class="card-body">
-                <img class="card-img-top" src="duck.jpg" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title">Уточка 1</h4>
-                    <p class="card-text">Просто уточка, ничего особенного.</p>
+                    <h4 class="card-title">Утка-качек</h4>
+                    <p class="card-text">Просто ни разу не прогуливала ФП</p>
                     <a href="#" class="btn btn-primary">Купить</a>
                 </div>
             </div>
@@ -115,35 +92,95 @@
 
         <div class="card" style="margin: 5%;">
             <div class="card-body">
-                <img class="card-img-top" src="duck.jpg" alt="Card image" style="width:100%">
+                <img class="card-img-top" src="Ducks/robber.jpg" alt="Card image" style="width:100%">
                 <div class="card-body">
-                    <h4 class="card-title">Уточка 1</h4>
-                    <p class="card-text">Просто уточка, ничего особенного.</p>
+                    <h4 class="card-title">Утка-вор</h4>
+                    <p class="card-text">Украдет твое сердечко, а потом твою девственность</p>
                     <a href="#" class="btn btn-primary">Купить</a>
                 </div>
             </div>
         </div>
-    
+
         <div class="card" style="margin: 5%;">
             <div class="card-body">
-                <img class="card-img-top" src="duck.jpg" alt="Card image" style="width:100%">
+                <img class="card-img-top" src="Ducks/Invalid.jpg" alt="Card image" style="width:100%">
                 <div class="card-body">
-                    <h4 class="card-title">Уточка 1</h4>
-                    <p class="card-text">Просто уточка, ничего особенного.</p>
+                    <h4 class="card-title">Уточка-инвалид</h4>
+                    <p class="card-text">А не надо было на ИПСУ поступать, уточка</p>
                     <a href="#" class="btn btn-primary">Купить</a>
                 </div>
             </div>
         </div>
-        
+        <div class="card" style="margin: 5%;">
+            <div class="card-body">
+                <img class="card-img-top" src="Ducks/Pony.jpg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">Утка-автомат по вышмату в этом семестре</h4>
+                    <p class="card-text">Существует только в сказках и твоих мечтах</p>
+                    <a href="#" class="btn btn-primary">Купить</a>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin: 5%;">
+            <div class="card-body">
+                <img class="card-img-top" src="Ducks/allah.jpg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">Уточка-араб</h4>
+                    <p class="card-text">Тебя ожидает настоящий взрыв эмоций!</p>
+                    <a href="#" class="btn btn-primary">Купить</a>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin: 5%;">
+            <div class="card-body">
+                <img class="card-img-top" src="Ducks/Mankey.jpg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">Утка-обезьяна</h4>
+                    <p class="card-text">Похожа на твоего бывшего</p>
+                    <a href="#" class="btn btn-primary">Купить</a>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin: 5%;">
+            <div class="card-body">
+                <img class="card-img-top" src="Ducks/Omon.jpg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">ОМОН-утка</h4>
+                    <p class="card-text">Для разрешения внутренних конфликтов</p>
+                    <a href="#" class="btn btn-primary">Купить</a>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin: 5%;">
+            <div class="card-body">
+                <img class="card-img-top" src="Ducks/Pank-2.jpg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">Уточка-панк</h4>
+                    <p class="card-text">Не совсем кибер, но уже панк</p>
+                    <a href="#" class="btn btn-primary">Купить</a>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin: 5%;">
+            <div class="card-body">
+                <img class="card-img-top" src="Ducks/Batman.jpg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">Бет-утка</h4>
+                    <p class="card-text">Черная, как Catboy Kami на стримах</p>
+                    <a href="#" class="btn btn-primary">Купить</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
-    <div class="container-fluid bg-grey">
-        <h2 class="text-center">CONTACT</h2>
+    <div class="container-fluid" style="background-color: mistyrose">
+        <h2 class="text-center">Оставьте свой отзыв!</h2>
         <div class="row">
             <div class="col-sm-2">
-                <div id="demo" class="carousel slide" data-ride="carousel" style="margin-bottom: 1vh">
-                    <a class="carousel-control-prev" style="background-color: black;" href="#demo" data-slide="prev">
+                <div id="demo" class="carousel slide" data-ride="carousel">
+                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                     </a>
                     <div class="carousel-inner" style="text-align-last: center">
@@ -171,11 +208,11 @@
                         <div class="carousel-item ">
                             <img src="Avatars/ava-red.png" alt="avatar">
                         </div>
-                        <div class="carousel-item " >
+                        <div class="carousel-item ">
                             <img src="Avatars/ava-violet.png" alt="avatar">
                         </div>
                     </div>
-                    <a class="carousel-control-next" style="background-color: black;" href="#demo" data-slide="next">
+                    <a class="carousel-control-next" href="#demo" data-slide="next">
                         <span class="carousel-control-next-icon"></span>
                     </a>
                 </div>
@@ -183,24 +220,26 @@
             <div class="col-sm-7">
                 <div class="row">
                     <div class="col-sm-6 form-group">
-                        <input class="form-control" id="NameInput" name="name" placeholder="Name" type="text" required>
+                        <input class="form-control" id="NameInput" name="name" placeholder="Имя" type="text" required>
                     </div>
                     <div class="col-sm-6 form-group">
-                        <input class="form-control" id="EmailInput" name="email" placeholder="Email" type="email" required>
+                        <input class="form-control" id="EmailInput" name="email" placeholder="Почта" type="email" required>
                     </div>
                 </div>
-                <textarea class="form-control" id="ContainerInput" name="comments" placeholder="Comment" rows="5"></textarea><br>
+                <textarea class="form-control" id="ContainerInput" name="comments" placeholder="Комментарий" rows="5"></textarea><br>
                 <div class="row">
                     <div class="col-sm-12 form-group">
-                        <button class="btn btn-outline-success pull-right" id="PostButton" type="submit" onclick="CreateComment();">Send</button>
+                        <button class="btn btn-outline-success pull-right" id="PostButton" type="submit" onclick="CreateComment();">Отправить</button>
                     </div>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <p>Наши контакты для обратной связи, остерегайтесь подделок!</p>
+                <p><span class="glyphicon glyphicon-phone"></span> +380 66-427-30-08</p>
+                <p><span class="glyphicon glyphicon-envelope"></span> KaShop@mail.wtf</p>
+            </div>
         </div>
+        <div id="CommentBox"></div>
     </div>
 
-    <div id="CommentBox"></div>
 </body>
-
->>>>>>> 4399fa40460377b4e09f60321bab8d39b8e1ae23
-</html>
