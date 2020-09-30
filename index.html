@@ -6,10 +6,57 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+
+    <style>
+        .offcanvas-header{ display:none; }
+.screen-overlay {
+  height: 100%;
+  z-index: 30;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity:0;
+  visibility:hidden;
+  background-color: rgba(34, 34, 34, 0.6);
+  transition:opacity .2s linear, visibility .1s, width 1s ease-in;
+}
+.screen-overlay.show {
+  transition:opacity .5s ease, width 0s;
+  opacity:1;
+  width:100%;
+  visibility:visible;
+}
+	
+@media all and (max-width:992px) { 
+
+ .offcanvas-header{ display:block; }
+ 
+ .mobile-offcanvas{
+    visibility: hidden;
+    transform:translateX(-100%);
+    border-radius:0; 
+    display:block;
+    position: fixed;
+    top: 0; left:0;
+    height: 100%;
+    z-index: 1200;
+    width:80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: visibility .2s ease-in-out, transform .2s ease-in-out;
+  }
+
+  .mobile-offcanvas.show{
+    visibility: visible;
+    transform: translateX(0);
+  }
+}
+    </style>
+
     <link rel="stylesheet" href="styles.css">
     <script>
-        const example = "<div class=\"media border p-3\"><img src=\"#AVATAR#\" alt=\"ava\" class=\"mr-3 mt-3 rounded-circle\" style=\"width:60px;\"><div class=\"media-body\"><h4>Posted on #NAME#<small><i>#DATA#</i></small></h4><p>#TEXT#</p><button class = \"btn btn-outline-danger\" onclick=\"RemoveComment(this)\">Remove Comment</button></div></div>"
+        const example =
+            "<div class=\"media border p-3\"><img src=\"#AVATAR#\" alt=\"ava\" class=\"mr-3 mt-3 rounded-circle\" style=\"width:60px;\"><div class=\"media-body\"><h4>Posted on #NAME#<small><i>#DATA#</i></small></h4><p>#TEXT#</p><button class = \"btn btn-outline-danger\" onclick=\"RemoveComment(this)\">Remove Comment</button></div></div>"
 
         function CreateComment() {
             let name = NameInput.value;
@@ -33,10 +80,26 @@
             PostButton.onclick = IsInValid ? null : CreateComment;
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             NameInput.onchange = Validate;
             ContainerInput.onchange = Validate;
             Validate();
+
+            $("[data-trigger]").on("click", function (e) {
+            console.log(1);
+            e.preventDefault();
+            e.stopPropagation();
+            var offcanvas_id = $(this).attr('data-trigger');
+            $(offcanvas_id).toggleClass("show");
+            $('body').toggleClass("offcanvas-active");
+            $(".screen-overlay").toggleClass("show");
+        });
+
+        $(".btn-close, .screen-overlay").click(function (e) {
+            $(".screen-overlay").removeClass("show");
+            $(".mobile-offcanvas").removeClass("show");
+            $("body").removeClass("offcanvas-active");
+        });
         })
 
         function BuyDuck(x) {
@@ -47,12 +110,15 @@
             x.parentElement.parentElement.remove();
         }
 
+
+
+       
     </script>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-right: 5%; margin-left: 5%; ">
+    <!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center" >
         <ul class="navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link" href="#">KaSHOp</a>
@@ -74,14 +140,37 @@
             </li>
         </ul>
     </nav>
+-->
+<b class="screen-overlay"></b>
+
+<b class="screen-overlay"></b>
+
+<button data-trigger="#navbar_main" class="d-lg-none btn btn-warning  fixed-top " type="button">  Show navbar </button>
+
+<nav id="navbar_main" class="mobile-offcanvas navbar navbar-expand-lg navbar-dark bg-dark justify-content-center" style="width: 30%;">
+  <div class="offcanvas-header">  
+    <button class="btn btn-danger btn-close float-right"> &times Close </button>
+    <h5 class="py-2 text-white">Main navbar</h5>
+  </div>
+  <ul class="navbar-nav">
+    <li class="nav-item active"> <a class="nav-link" href="#">KaSHOp </a> </li>
+    <li class="nav-item"><a class="nav-link" href="#"> Утошки </a></li>
+    <li class="nav-item"><a class="nav-link" href="#"> Контакты </a></li>
+    <li class="nav-item"><a class="nav-link" href="#"> О нас </a></li>
+    <li class="nav-item"><a class="nav-link" href="GameOfLife.html"> Клеточный автомат "Жизнь" </a></li>
+  </ul>
+</nav>
+
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
 
         <div class="card" style="margin: 5%;">
             <div class="card-body">
                 <img class="card-img-top" src="Ducks/Boss.png" alt="Card image" style="width:100%">
                 <h4 class="card-title">Утка-босс</h4>
-                <p class="card-text" style="height: 90">Ты просишь принять со мной ванную, но ты делаешь это без уважения</p>
-                <button type="button" class="btn btn-info btn-lg " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <p class="card-text" style="height: 90">Ты просишь принять со мной ванную, но ты делаешь это без
+                    уважения</p>
+                <button type="button" class="btn btn-info btn-lg " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
 
@@ -90,7 +179,8 @@
                 <img class="card-img-top" src="Ducks/BodyBuilder.jpg" alt="Card image" style="width:100%">
                 <h4 class="card-title">Утка-качек</h4>
                 <p class="card-text" style="height: 90">Сдай реферат по ФП, будешь таким же</p>
-                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
 
@@ -99,7 +189,8 @@
                 <img class="card-img-top" src="Ducks/robber.jpg" alt="Card image" style="width:100%">
                 <h4 class="card-title">Утка-вор</h4>
                 <p class="card-text" style="height: 90">Украдет твое сердечко, а потом твою стипендию</p>
-                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
 
@@ -108,7 +199,8 @@
                 <img class="card-img-top" src="Ducks/Invalid.jpg" alt="Card image" style="width:100%">
                 <h4 class="card-title">Уточка-инвалид</h4>
                 <p class="card-text" style="height: 90">А не надо было на ИПСУ поступать, уточка</p>
-                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
 
@@ -117,7 +209,8 @@
                 <img class="card-img-top" src="Ducks/allah.jpg" alt="Card image" style="width:100%">
                 <h4 class="card-title">Уточка-араб</h4>
                 <p class="card-text" style="height: 90">Тебя ожидает настоящий взрыв эмоций!</p>
-                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
         <div class="card" style="margin: 5%;">
@@ -125,7 +218,8 @@
                 <img class="card-img-top" src="Ducks/Pony.jpg" alt="Card image" style="width:100%">
                 <h4 class="card-title">Утка-"А" по вышке</h4>
                 <p class="card-text" style="height: 90">Существует только в сказках и твоих мечтах</p>
-                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
         <div class="card" style="margin: 5%;">
@@ -133,7 +227,8 @@
                 <img class="card-img-top" src="Ducks/Mankey.jpg" alt="Card image" style="width:100%">
                 <h4 class="card-title">Утка-обезьяна</h4>
                 <p class="card-text" style="height: 90">Похожа на твоего бывшего</p>
-                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
         <div class="card" style="margin: 5%;">
@@ -141,7 +236,8 @@
                 <img class="card-img-top" src="Ducks/Omon.jpg" alt="Card image" style="width:100%">
                 <h4 class="card-title">ОМОН-утка</h4>
                 <p class="card-text" style="height: 90">Для разрешения внутренних конфликтов</p>
-                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
         <div class="card" style="margin: 5%;">
@@ -149,7 +245,8 @@
                 <img class="card-img-top" src="Ducks/Pank-2.jpg" alt="Card image" style="width:100%">
                 <h4 class="card-title">Утка-панк</h4>
                 <p class="card-text" style="height: 90">Не совсем кибер, но уже панк</p>
-                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
         <div class="card" style="margin: 5%;">
@@ -157,7 +254,8 @@
                 <img class="card-img-top" src="Ducks/Batman.jpg" alt="Card image" style="width:100%">
                 <h4 class="card-title">Бет-утка</h4>
                 <p class="card-text" style="height: 90">Черная, как Catboy Kami на стримах</p>
-                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
         <div class="card" style="margin: 5%;">
@@ -165,7 +263,8 @@
                 <img class="card-img-top" src="Ducks/Knight.jpg" alt="Card image" style="width:100%">
                 <h4 class="card-title">Рыцарь-утка</h4>
                 <p class="card-text" style="height: 90">В поисках твоего сердечка и святого Грааля</p>
-                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal" onclick="BuyDuck(this)">Купить</button>
+                <button type="button" class="btn btn-info btn-lg  " data-toggle="modal" data-target="#myModal"
+                    onclick="BuyDuck(this)">Купить</button>
             </div>
         </div>
 
@@ -247,13 +346,16 @@
                         <input class="form-control" id="NameInput" name="name" placeholder="Имя" type="text" required>
                     </div>
                     <div class="col-sm-6 form-group">
-                        <input class="form-control" id="EmailInput" name="email" placeholder="Почта" type="email" required>
+                        <input class="form-control" id="EmailInput" name="email" placeholder="Почта" type="email"
+                            required>
                     </div>
                 </div>
-                <textarea class="form-control" id="ContainerInput" name="comments" placeholder="Комментарий" rows="5"></textarea><br>
+                <textarea class="form-control" id="ContainerInput" name="comments" placeholder="Комментарий"
+                    rows="5"></textarea><br>
                 <div class="row">
                     <div class="col-sm-12 form-group">
-                        <button class="btn btn-outline-success pull-right" id="PostButton" type="submit" onclick="CreateComment();">Отправить</button>
+                        <button class="btn btn-outline-success pull-right" id="PostButton" type="submit"
+                            onclick="CreateComment();">Отправить</button>
                     </div>
                 </div>
             </div>
