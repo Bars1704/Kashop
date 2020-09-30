@@ -8,49 +8,56 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
-        .offcanvas-header{ display:none; }
-.screen-overlay {
-  height: 100%;
-  z-index: 30;
-  position: fixed;
-  top: 0;
-  left: 0;
-  opacity:0;
-  visibility:hidden;
-  background-color: rgba(34, 34, 34, 0.6);
-  transition:opacity .2s linear, visibility .1s, width 1s ease-in;
-}
-.screen-overlay.show {
-  transition:opacity .5s ease, width 0s;
-  opacity:1;
-  width:100%;
-  visibility:visible;
-}
-	
-@media all and (max-width:992px) { 
+        .offcanvas-header {
+            display: none;
+        }
 
- .offcanvas-header{ display:block; }
- 
- .mobile-offcanvas{
-    visibility: hidden;
-    transform:translateX(-100%);
-    border-radius:0; 
-    display:block;
-    position: fixed;
-    top: 0; left:0;
-    height: 100%;
-    z-index: 1200;
-    width:80%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    transition: visibility .2s ease-in-out, transform .2s ease-in-out;
-  }
+        .screen-overlay {
+            height: 100%;
+            z-index: 30;
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            background-color: rgba(34, 34, 34, 0.6);
+            transition: opacity .2s linear, visibility .1s, width 1s ease-in;
+        }
 
-  .mobile-offcanvas.show{
-    visibility: visible;
-    transform: translateX(0);
-  }
-}
+        .screen-overlay.show {
+            transition: opacity .5s ease, width 0s;
+            opacity: 1;
+            width: 100%;
+            visibility: visible;
+        }
+
+        @media all and (max-width:992px) {
+
+            .offcanvas-header {
+                display: block;
+            }
+
+            .mobile-offcanvas {
+                visibility: hidden;
+                transform: translateX(-100%);
+                border-radius: 0;
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 1200;
+                width: 80%;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                transition: visibility .2s ease-in-out, transform .2s ease-in-out;
+            }
+
+            .mobile-offcanvas.show {
+                visibility: visible;
+                transform: translateX(0);
+            }
+        }
     </style>
 
     <link rel="stylesheet" href="styles.css">
@@ -80,7 +87,7 @@
             PostButton.onclick = IsInValid ? null : CreateComment;
         }
 
-        $(document).ready(function () {
+        /* $(document).ready(function () {
             NameInput.onchange = Validate;
             ContainerInput.onchange = Validate;
             Validate();
@@ -93,15 +100,17 @@
             $(offcanvas_id).toggleClass("show");
             $('body').toggleClass("offcanvas-active");
             $(".screen-overlay").toggleClass("show");
+            $("#navbar_main").width("40%");
         });
 
         $(".btn-close, .screen-overlay").click(function (e) {
             $(".screen-overlay").removeClass("show");
             $(".mobile-offcanvas").removeClass("show");
             $("body").removeClass("offcanvas-active");
+            $("#navbar_main").width("100%");
         });
         })
-
+*/
         function BuyDuck(x) {
             document.getElementById("DuckName").textContent = "К покупке: " + x.parentElement.children[1].textContent
         }
@@ -109,10 +118,6 @@
         function RemoveComment(x) {
             x.parentElement.parentElement.remove();
         }
-
-
-
-       
     </script>
 </head>
 
@@ -140,14 +145,14 @@
             </li>
         </ul>
     </nav>
--->
+
 <b class="screen-overlay"></b>
 
 <b class="screen-overlay"></b>
 
 <button data-trigger="#navbar_main" class="d-lg-none btn btn-warning  fixed-top " type="button">  Show navbar </button>
 
-<nav id="navbar_main" class="mobile-offcanvas navbar navbar-expand-lg navbar-dark bg-dark justify-content-center" style="width: 30%;">
+<nav id="navbar_main" class="mobile-offcanvas navbar navbar-expand-lg navbar-dark bg-dark justify-content-center " style="width: 100%;">
   <div class="offcanvas-header">  
     <button class="btn btn-danger btn-close float-right"> &times Close </button>
     <h5 class="py-2 text-white">Main navbar</h5>
@@ -160,6 +165,33 @@
     <li class="nav-item"><a class="nav-link" href="GameOfLife.html"> Клеточный автомат "Жизнь" </a></li>
   </ul>
 </nav>
+-->
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">KaSHOp</a>
+  
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Утошки</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Контакты</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">О нас</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
 
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
 
